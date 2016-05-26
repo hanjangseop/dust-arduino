@@ -2,13 +2,13 @@
 
 static byte mymac[] = { 0x74, 0x69, 0x69, 0x2D, 0x30, 0x31 }; 
 //이더넷 카드마다 다르게 설정하는 것(임의적(랜덤)으로 수정하면 됩니다. 16진수(0x는) 유지하고 뒤에 숫자만 변경해 주시면 됩니다.
-static byte myip[] = { 165, 132, 46, 120 }; // ip address
+static byte myip[] = { 192, 168, 219, 101 }; // ip address
 const char ad_id[] PROGMEM = "/data/0/"; //아두이노 ID
 
-static byte gwip[] = { 165, 132, 46, 1 }; //gateway
+static byte gwip[] = { 192, 168, 219, 1 }; //gateway
 static byte hisip[] = { 52, 68, 126, 129 }; //접속할 IP
 static byte dns_ip[] = { 165, 132, 10, 21 }; // dns
-static byte mask[] = { 255, 255, 252, 0 }; // subnet mask
+static byte mask[] = { 255, 255, 255, 0 }; // subnet mask
 
 byte Ethernet::buffer[500];
 const char website[] PROGMEM = "dust.toycode.org";
@@ -25,7 +25,7 @@ int delayTime2=40;
 float offTime=9680;
 
 unsigned long lastConnectionTime = 0;
-const unsigned long POSTING_INTERVAL = 10*1000;
+const unsigned long POSTING_INTERVAL = 15*1000;
 
 char url_buf[113];
 
@@ -63,7 +63,7 @@ void sendData() {
 
   Serial.println();
   Serial.print("<<< REQ ");
-  ether.browseUrl(PSTR(ad_id), url_buf, website, my_callback);  
+  ether.browseUrl(ad_id, url_buf, website, my_callback);  
 }
 
 static void my_callback (byte status, word off, word len) {
